@@ -1,0 +1,28 @@
+name: str_customer_app
+description: "STR Customer App"
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.5
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/cart_icon_grey.png
+    - assets/images/cart_icon_black.png
