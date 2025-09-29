@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:str_customer_app/screens/CustomerScreens/home_screen.dart';
+import 'package:str_customer_app/screens/OnboardingScreens/onboarding_screen.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/home/home_event.dart';
 import 'repositories/food_repository.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
             visualDensity: VisualDensity.adaptivePlatformDensity,
             useMaterial3: true,
           ),
-          home: HomeScreen(),
+          home: OnboardingScreen(),
           debugShowCheckedModeBanner: false,
         ),
       ),
