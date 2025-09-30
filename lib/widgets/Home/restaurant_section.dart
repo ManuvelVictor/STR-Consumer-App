@@ -10,12 +10,9 @@ class RestaurantSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-            (context, index) {
-          return RestaurantCard(restaurant: restaurants[index]);
-        },
-        childCount: restaurants.length,
-      ),
+      delegate: SliverChildBuilderDelegate((context, index) {
+        return RestaurantCard(restaurant: restaurants[index]);
+      }, childCount: restaurants.length),
     );
   }
 }

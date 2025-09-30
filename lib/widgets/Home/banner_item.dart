@@ -33,10 +33,7 @@ class BannerItem extends StatelessWidget {
                 SizedBox(height: 8),
                 Text(
                   banner.subtitle,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ],
             ),

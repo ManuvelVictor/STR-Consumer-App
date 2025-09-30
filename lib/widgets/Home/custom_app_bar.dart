@@ -45,7 +45,6 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -72,7 +71,10 @@ class CustomAppBar extends StatelessWidget {
               color: Colors.transparent,
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -109,7 +111,10 @@ class CustomAppBar extends StatelessWidget {
                             CircleAvatar(
                               radius: 18,
                               backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.person, color: Colors.grey),
+                              child: const Icon(
+                                Icons.person,
+                                color: Colors.grey,
+                              ),
                             ),
                           ],
                         ),
