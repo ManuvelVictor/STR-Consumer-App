@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:str_customer_app/nav/routes.dart';
 import 'package:str_customer_app/utils/app_colors.dart';
-
 import '../../widgets/Onboarding/bottom_controls.dart';
 import '../../widgets/Onboarding/knife_animation.dart';
 import '../../widgets/Onboarding/overlay_image.dart';

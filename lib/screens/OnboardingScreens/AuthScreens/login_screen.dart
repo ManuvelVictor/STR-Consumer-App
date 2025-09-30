@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../blocs/login/login_bloc.dart';
-import '../../blocs/login/login_event.dart';
-import '../../blocs/login/login_state.dart';
-import '../../nav/routes.dart';
-import '../../widgets/Auth/auth_background.dart';
-import '../../widgets/Auth/auth_bottom_text.dart';
-import '../../widgets/Auth/auth_button.dart';
-import '../../widgets/Auth/auth_header.dart';
-import '../../widgets/Auth/auth_logo.dart';
-import '../../widgets/Auth/auth_text_field.dart';
+import '../../../blocs/login/login_bloc.dart';
+import '../../../blocs/login/login_event.dart';
+import '../../../blocs/login/login_state.dart';
+import '../../../nav/routes.dart';
+import '../../../widgets/Auth/auth_background.dart';
+import '../../../widgets/Auth/auth_bottom_text.dart';
+import '../../../widgets/Auth/auth_button.dart';
+import '../../../widgets/Auth/auth_header.dart';
+import '../../../widgets/Auth/auth_logo.dart';
+import '../../../widgets/Auth/auth_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -23,9 +23,7 @@ class LoginScreen extends StatelessWidget {
         child: BlocConsumer<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state.isSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Login Successful!")),
-              );
+              context.push(AppRoutes.otp, extra: state.phone);
             }
             if (state.isFailure) {
               ScaffoldMessenger.of(context).showSnackBar(

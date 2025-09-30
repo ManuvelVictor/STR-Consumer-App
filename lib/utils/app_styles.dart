@@ -66,7 +66,7 @@ class AppStyles {
 
   // Button styles
   static ButtonStyle primaryButtonStyle = ElevatedButton.styleFrom(
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.primaryOrange,
     foregroundColor: Colors.white,
     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
     shape: RoundedRectangleBorder(

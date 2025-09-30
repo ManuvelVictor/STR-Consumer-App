@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../blocs/signup/signup_bloc.dart';
-import '../../blocs/signup/signup_event.dart';
-import '../../blocs/signup/signup_state.dart';
-import '../../nav/routes.dart';
-import '../../widgets/Auth/auth_background.dart';
-import '../../widgets/Auth/auth_logo.dart';
-import '../../widgets/Auth/auth_header.dart';
-import '../../widgets/Auth/auth_text_field.dart';
-import '../../widgets/Auth/auth_button.dart';
-import '../../widgets/Auth/auth_bottom_text.dart';
+import '../../../blocs/signup/signup_bloc.dart';
+import '../../../blocs/signup/signup_event.dart';
+import '../../../blocs/signup/signup_state.dart';
+import '../../../nav/routes.dart';
+import '../../../widgets/Auth/auth_background.dart';
+import '../../../widgets/Auth/auth_bottom_text.dart';
+import '../../../widgets/Auth/auth_button.dart';
+import '../../../widgets/Auth/auth_header.dart';
+import '../../../widgets/Auth/auth_logo.dart';
+import '../../../widgets/Auth/auth_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});

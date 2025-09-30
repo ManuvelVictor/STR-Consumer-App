@@ -20,6 +20,7 @@ class AuthTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: inputType,
+      cursorColor: AppColors.primaryOrange,
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
