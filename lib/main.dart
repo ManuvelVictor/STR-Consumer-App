@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:str_customer_app/screens/CustomerScreens/home_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'blocs/home/home_bloc.dart';
 import 'blocs/home/home_event.dart';
+import 'data/local/shared_preferences.dart';
+import 'nav/app_router.dart';
 import 'repositories/food_repository.dart';
 import 'services/location_service.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final isLoggedIn = await AuthStorage.isLoggedIn();
+
+  final appRouter = AppRouter(isLoggedIn);
+
+  runApp(MyApp(appRouter: appRouter));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter appRouter;
+
+  const MyApp({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +43,15 @@ class MyApp extends StatelessWidget {
             )..add(LoadHomeData()),
           ),
         ],
-        child: MaterialApp(
-          title: 'Food Delivery App',
+        child: MaterialApp.router(
+          title: 'STR',
           theme: ThemeData(
+            textTheme: GoogleFonts.poppinsTextTheme(),
             primarySwatch: Colors.orange,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             useMaterial3: true,
           ),
-          home: HomeScreen(),
+          routerConfig: appRouter.router,
           debugShowCheckedModeBanner: false,
         ),
       ),

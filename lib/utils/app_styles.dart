@@ -1,47 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppStyles {
-  static const TextStyle headlineLarge = TextStyle(
+
+  static final TextStyle buttonText = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.black87,
+  );
+
+  static final TextStyle skipText = GoogleFonts.poppins(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
+
+  static final TextStyle headlineLarge = GoogleFonts.poppins(
     fontSize: 32,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineMedium = TextStyle(
+  static final TextStyle headlineMedium = GoogleFonts.poppins(
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineSmall = TextStyle(
+  static final TextStyle headlineSmall = GoogleFonts.poppins(
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodyLarge = TextStyle(
+  static final TextStyle bodyLarge = GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.normal,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
+  static final TextStyle bodyMedium = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.normal,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodySmall = TextStyle(
+  static final TextStyle bodySmall = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.textSecondary,
   );
 
-  static const TextStyle caption = TextStyle(
+  static final TextStyle caption = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.textHint,
+  );
+
+  static final TextStyle bodyMediumButton = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: AppColors.textPrimary,
   );
 
   // Button styles
