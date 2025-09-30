@@ -1,4 +1,4 @@
-# str_customer_app
+# STR
 
 STR Food Delivery Applications
 -- STR Customer App
