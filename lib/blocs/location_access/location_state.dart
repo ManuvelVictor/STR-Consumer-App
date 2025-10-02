@@ -3,13 +3,17 @@ class LocationState {
   final bool isSuccess;
   final bool isFailure;
   final bool isPermissionDenied;
+  final bool justGrantedNow;
+  final bool shouldNavigate;
   final String? errorMessage;
 
-  LocationState({
+  const LocationState({
     this.isLoading = false,
     this.isSuccess = false,
     this.isFailure = false,
     this.isPermissionDenied = false,
+    this.justGrantedNow = false,
+    this.shouldNavigate = false,
     this.errorMessage,
   });
 
@@ -18,6 +22,8 @@ class LocationState {
     bool? isSuccess,
     bool? isFailure,
     bool? isPermissionDenied,
+    bool? justGrantedNow,
+    bool? shouldNavigate,
     String? errorMessage,
   }) {
     return LocationState(
@@ -25,6 +31,8 @@ class LocationState {
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
       isPermissionDenied: isPermissionDenied ?? this.isPermissionDenied,
+      justGrantedNow: justGrantedNow ?? this.justGrantedNow,
+      shouldNavigate: shouldNavigate ?? this.shouldNavigate,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

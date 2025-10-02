@@ -1,70 +1,110 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'location_event.dart';
 import 'location_state.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
-  LocationBloc() : super(LocationState()) {
+  LocationBloc() : super(const LocationState()) {
     on<EnableLocationRequested>(_onEnableLocation);
     on<SkipLocationRequested>(_onSkipLocation);
     on<CheckLocationPermission>(_onCheckPermission);
+    on<CompleteLocationGranted>(_onCompleteLocationGranted);
   }
 
   Future<void> _onEnableLocation(
-    EnableLocationRequested event,
-    Emitter<LocationState> emit,
-  ) async {
-    emit(state.copyWith(isLoading: true));
+      EnableLocationRequested event,
+      Emitter<LocationState> emit,
+      ) async {
+    emit(const LocationState(isLoading: true));
 
     try {
-      // TODO: Request location_access permission
-      // import 'package:geolocator/geolocator.dart';
-      // LocationPermission permission = await Geolocator.requestPermission();
+      final status = await Permission.location.request();
 
-      await Future.delayed(const Duration(seconds: 1)); // Simulate API call
+      if (status.isDenied) {
+        emit(
+          const LocationState(
+            isLoading: false,
+            isPermissionDenied: true,
+            errorMessage: "Location permission denied",
+          ),
+        );
+        return;
+      }
 
-      // if (permission == LocationPermission.denied) {
-      //   emit(state.copyWith(
-      //     isLoading: false,
-      //     isPermissionDenied: true,
-      //     errorMessage: "Location permission denied",
-      //   ));
-      //   return;
-      // }
+      if (status.isPermanentlyDenied) {
+        emit(
+          const LocationState(
+            isLoading: false,
+            isPermissionDenied: true,
+            errorMessage:
+            "Location permission permanently denied. Please enable in settings.",
+          ),
+        );
+        return;
+      }
 
-      emit(state.copyWith(isLoading: false, isSuccess: true));
+      if (status.isGranted) {
+        emit(const LocationState(
+          isLoading: false,
+          justGrantedNow: true,
+          isSuccess: false,
+          shouldNavigate: false,
+        ));
+
+        await Future.delayed(const Duration(seconds: 2));
+
+        add(CompleteLocationGranted());
+      }
     } catch (e) {
       emit(
-        state.copyWith(
+        LocationState(
           isLoading: false,
           isFailure: true,
-          errorMessage: "Failed to enable location_access",
+          errorMessage: "Failed to enable location: $e",
         ),
       );
     }
   }
 
+  void _onCompleteLocationGranted(
+      CompleteLocationGranted event,
+      Emitter<LocationState> emit,
+      ) {
+    emit(const LocationState(
+      isSuccess: true,
+      justGrantedNow: false,
+      shouldNavigate: true,
+    ));
+  }
+
   Future<void> _onSkipLocation(
-    SkipLocationRequested event,
-    Emitter<LocationState> emit,
-  ) async {
-    emit(state.copyWith(isSuccess: true));
+      SkipLocationRequested event,
+      Emitter<LocationState> emit,
+      ) async {
+    emit(const LocationState(
+      isSuccess: true,
+      justGrantedNow: false,
+      shouldNavigate: true,
+    ));
   }
 
   Future<void> _onCheckPermission(
-    CheckLocationPermission event,
-    Emitter<LocationState> emit,
-  ) async {
+      CheckLocationPermission event,
+      Emitter<LocationState> emit,
+      ) async {
     try {
-      // TODO: Check if location_access permission is already granted
-      // import 'package:geolocator/geolocator.dart';
-      // LocationPermission permission = await Geolocator.checkPermission();
-      // if (permission == LocationPermission.always ||
-      //     permission == LocationPermission.whileInUse) {
-      //   emit(state.copyWith(isSuccess: true));
-      // }
+      final status = await Permission.location.status;
+
+      if (status.isGranted) {
+        emit(const LocationState(
+          isSuccess: true,
+          justGrantedNow: false,
+          shouldNavigate: true,
+        ));
+      }
     } catch (e) {
-      // Continue to show location_access screen
+      // Let UI stay on location access screen
     }
   }
 }

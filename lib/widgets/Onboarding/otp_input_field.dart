@@ -38,7 +38,7 @@ class OtpInputField extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 15, left: 8, right: 8, bottom: 8),
+        padding: const EdgeInsets.only(top: 25, left: 8, right: 8, bottom: 8),
         child: TextField(
           controller: controller,
           focusNode: focusNode,
@@ -51,13 +51,18 @@ class OtpInputField extends StatelessWidget {
             color: AppColors.textPrimary,
             fontWeight: FontWeight.w600,
           ),
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(1),
+          ],
           decoration: const InputDecoration(
             counterText: '',
             border: InputBorder.none,
             contentPadding: EdgeInsets.zero,
+            isCollapsed: true,
           ),
           onChanged: onChanged,
+          textInputAction: TextInputAction.next,
         ),
       ),
     );
