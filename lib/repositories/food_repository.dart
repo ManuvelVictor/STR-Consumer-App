@@ -1,26 +1,14 @@
-import 'dart:ui';
 import '../models/Home/banner_model.dart';
 import '../models/Home/food_item_model.dart';
 import '../models/Home/restaurant_model.dart';
 
 class FoodRepository {
   Future<List<BannerModel>> getBanners() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 500));
     return [
-      BannerModel(
-        id: '1',
-        title: 'GET 50%\nOFF',
-        subtitle: 'ON YOUR 1ST ORDER',
-        imageUrl: 'assets/nachos.jpg',
-        backgroundColor: Color(0xFF2D2D2D),
-      ),
-      BannerModel(
-        id: '2',
-        title: 'FREE\nDELIVERY',
-        subtitle: 'ON ORDERS ABOVE ₹299',
-        imageUrl: 'assets/pizza.jpg',
-        backgroundColor: Color(0xFFD32F2F),
-      ),
+      BannerModel(image: "assets/images/banner.png"),
+      BannerModel(image: "assets/images/banner.png"),
+      BannerModel(image: "assets/images/banner.png"),
     ];
   }
 

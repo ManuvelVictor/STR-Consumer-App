@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:str_customer_app/utils/app_colors.dart';
 import '../../models/Home/location_model.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -48,7 +49,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Colors.orange[400],
+      backgroundColor: AppColors.primaryOrange,
       elevation: 0,
       pinned: true,
       expandedHeight: 120,
@@ -58,76 +59,89 @@ class CustomAppBar extends StatelessWidget {
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
       title: showOnlySearch ? _buildAnimatedSearchBar(0.0) : null,
-      flexibleSpace: LayoutBuilder(
-        builder: (context, constraints) {
-          final maxHeight = 120.0;
-          final minHeight = 60.0;
-          final currentHeight = constraints.maxHeight;
-          double t = (1 - (currentHeight - minHeight) / (maxHeight - minHeight))
-              .clamp(0.0, 1.0);
-          return FlexibleSpaceBar(
-            titlePadding: EdgeInsets.zero,
-            background: Container(
-              color: Colors.transparent,
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AnimatedOpacity(
-                        duration: const Duration(milliseconds: 200),
-                        opacity: 1 - t,
-                        child: Row(
-                          children: [
-                            const Icon(Icons.location_on, color: Colors.black),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    location.label,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    location.address,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black87,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/top_bar_bg.png"),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxHeight = 120.0;
+            final minHeight = 60.0;
+            final currentHeight = constraints.maxHeight;
+            double t =
+                (1 - (currentHeight - minHeight) / (maxHeight - minHeight))
+                    .clamp(0.0, 1.0);
+            return FlexibleSpaceBar(
+              titlePadding: EdgeInsets.zero,
+              background: Container(
+                color: Colors.transparent,
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 200),
+                          opacity: 1 - t,
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Colors.black,
                               ),
-                            ),
-                            CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(
-                                Icons.person,
-                                color: Colors.grey,
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      location.label,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      location.address,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black87,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                              CircleAvatar(
+                                radius: 18,
+                                backgroundColor: Colors.grey[300],
+                                child: const Icon(
+                                  Icons.person,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      _buildAnimatedSearchBar(t),
-                    ],
+                        const SizedBox(height: 8),
+                        _buildAnimatedSearchBar(t),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

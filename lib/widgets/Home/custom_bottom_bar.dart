@@ -38,15 +38,30 @@ class CustomBottomBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildBottomNavItem(Icons.home, "Home", 0),
+          _buildBottomNavItem(
+            selectedImage: "assets/images/home_selected.png",
+            unselectedImage: "assets/images/home_unselected.png",
+            label: "Home",
+            index: 0,
+          ),
           const SizedBox(width: 60),
-          _buildBottomNavItem(Icons.restaurant_menu, "Catering", 2),
+          _buildBottomNavItem(
+            selectedImage: "assets/images/catering_selected.png",
+            unselectedImage: "assets/images/catering_unselected.png",
+            label: "Catering",
+            index: 2,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBottomNavItem(IconData icon, String label, int index) {
+  Widget _buildBottomNavItem({
+    required String selectedImage,
+    required String unselectedImage,
+    required String label,
+    required int index,
+  }) {
     final isActive = currentIndex == index;
     return GestureDetector(
       onTap: () => onTap(index),
@@ -55,10 +70,18 @@ class CustomBottomBar extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              color: isActive ? Colors.orange : Colors.grey,
-              size: lerpDouble(20, 24, animation)!,
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Image.asset(
+                  isActive ? selectedImage : unselectedImage,
+                  width: 24,
+                  height: 24,
+                  alignment: Alignment.center,
+                ),
+              ),
             ),
             const SizedBox(height: 4),
             AnimatedOpacity(
@@ -68,7 +91,7 @@ class CustomBottomBar extends StatelessWidget {
                 label,
                 style: TextStyle(
                   color: isActive ? Colors.orange : Colors.grey,
-                  fontSize: lerpDouble(0, 12, animation),
+                  fontSize: 12,
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
